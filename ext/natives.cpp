@@ -342,7 +342,7 @@ static cell_t Native_AddressOf(IPluginContext *pContext, const cell_t *params)
 #ifdef PLATFORM_X86
 	return (cell_t)var;
 #else
-	return pseudoAddr.ToPseudoAddress(var);
+	return smutils->ToPseudoAddress(var);
 #endif
 }
 
@@ -359,7 +359,7 @@ static cell_t Native_StoreToAddressFast(IPluginContext *pContext, const cell_t *
 #ifdef PLATFORM_X86
 	void *addr = reinterpret_cast<void*>(params[1]);
 #else
-	void *addr = pseudoAddr.FromPseudoAddress(params[1]);
+	void *addr = smutils->FromPseudoAddress(params[1]);
 #endif
 
 	if (addr == NULL)
