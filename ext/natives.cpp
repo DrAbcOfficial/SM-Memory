@@ -426,7 +426,8 @@ static cell_t Native_VAFormat(IPluginContext *pContext, const cell_t *params)
 #ifdef PLATFORM_X86
 	va_list va = (va_list)params[4];
 #else
-	va_list va = (va_list)smutils->FromPseudoAddress(params[4]);
+	auto ptr = smutils->FromPseudoAddress(params[4]);
+	va_list va = (va_list)ptr;
 #endif
 
 	va_list cpy;
