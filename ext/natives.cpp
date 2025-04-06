@@ -424,11 +424,12 @@ static cell_t Native_VAFormat(IPluginContext *pContext, const cell_t *params)
 	pContext->LocalToString(params[3], &format);
 
 #ifdef PLATFORM_X86
-	va_list va = (va_list)params[4];
+	auto args_ptr = params[4];
 #else
-	auto ptr = smutils->FromPseudoAddress(params[4]);
-	va_list va = (va_list)ptr;
+	auto args_ptr = smutils->FromPseudoAddress(params[4]);
 #endif
+    va_list va;
+    memcpy(&va, args_ptr, sizeof(va_list));
 
 	va_list cpy;
 	va_copy(cpy, va);
